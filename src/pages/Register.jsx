@@ -12,6 +12,22 @@ const Register = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+  const validatePassword = (password) => {
+    const rules = {
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      specialChar: /[@$!%*?&]/.test(password),
+      length: password.length >= 8,
+    };
+
+    if (!rules.uppercase) return "At least one uppercase letter.";
+    if (!rules.lowercase) return "At least one lowercase letter.";
+    if (!rules.number) return "At least one number.";
+    if (!rules.specialChar) return "At least one special character.";
+    if (!rules.length) return "At least 8 characters long.";
+    return true;
+  };
   return (
     <div className="flex flex-row-reverse">
       <div className="max-w-md mx-auto my-4 p-6 rounded-lg shadow bg-base-200 w-1/2">
@@ -83,18 +99,13 @@ const Register = () => {
                 placeholder="•••••••"
                 className="input input-bordered w-full"
                 {...register("password", {
-                  required: true,
-                  minLength: 6,
+                  required: "Password is required",
+                  validate: validatePassword,
                 })}
               />
-              {errors.password?.type === "required" && (
+              {errors.password && (
                 <p className="text-red-500 text-sm font-light">
-                  Password is required
-                </p>
-              )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-red-500 text-sm font-light">
-                  Password must have at least 6 characters
+                  {errors.password.message}
                 </p>
               )}
             </div>
