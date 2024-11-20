@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -93,16 +97,22 @@ const Register = () => {
               <label htmlFor="password" className="label flex justify-between">
                 <span className="label-text">Password</span>
               </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="•••••••"
-                className="input input-bordered w-full"
-                {...register("password", {
-                  required: "Password is required",
-                  validate: validatePassword,
-                })}
-              />
+              <label className="input input-bordered flex items-center">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="•••••••"
+                  className="grow w-full"
+                  {...register("password", {
+                    required: "Password is required",
+                    validate: validatePassword,
+                  })}
+                />
+                <p onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </p>
+              </label>
+
               {errors.password && (
                 <p className="text-red-500 text-sm font-light">
                   {errors.password.message}
@@ -116,20 +126,25 @@ const Register = () => {
               >
                 <span className="label-text">Confirm Password</span>
               </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                placeholder="•••••••"
-                className="input input-bordered w-full"
-                {...register("confirmPassword", {
-                  required: true,
-                  validate: (value) => {
-                    if (watch("password") != value) {
-                      return "Passwords not match";
-                    }
-                  },
-                })}
-              />
+              <label className="input input-bordered flex items-center">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  placeholder="•••••••"
+                  className="grow w-full"
+                  {...register("confirmPassword", {
+                    required: true,
+                    validate: (value) => {
+                      if (watch("password") != value) {
+                        return "Passwords not match";
+                      }
+                    },
+                  })}
+                />
+                <p onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                  {showConfirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </p>
+              </label>
               {errors.confirmPassword && (
                 <p className="text-red-500 text-sm font-light">
                   Both password must match
