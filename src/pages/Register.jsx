@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { createUser, googleLogin } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,7 +19,33 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const name = data.name;
+    const email = data.email;
+    const role = data.role;
+    const status = role === "buyer" ? "Approved" : "pending";
+    const wishlist = [];
+    const userData = { name, email, role, status, wishlist };
+    console.log(userData);
+    createUser(email, data.password).then(() => {
+      axios.post(`http://localhost:5000/users`, userData).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Registration successful",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+          navigate("/");
+        }
+      });
+    });
+  };
+
+  const googleLoginUser = () => {
+    googleLogin().then(() => {
+      navigate("/");
+    });
   };
   const validatePassword = (password) => {
     const rules = {
@@ -48,6 +79,7 @@ const Register = () => {
         <div className="my-2">
           <button
             type="button"
+            onClick={googleLoginUser}
             className="btn btn-outline btn-accent w-full gap-2"
           >
             <FcGoogle className="w-5 h-5" />

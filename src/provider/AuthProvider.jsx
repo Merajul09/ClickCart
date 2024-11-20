@@ -10,10 +10,12 @@ import {
 import { auth } from "../firebase/firebase.config";
 import PropTypes from "prop-types";
 import { AuthContext } from "../hooks/useAuth";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const from = location.state || "/";
   const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
@@ -31,7 +33,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      if (currentUser) {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/authentication`, {
+            email: currentUser.email,
+          })
+          .then((data) => {
+            if (data.data) {
+              localStorage.setItem("access-token", data?.data?.token);
+              setLoading(false);
+            }
+          });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
     });
     return () => {
       return unsubscribe();
@@ -45,6 +61,7 @@ const AuthProvider = ({ children }) => {
     loginUser,
     googleLogin,
     logOut,
+    from,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
