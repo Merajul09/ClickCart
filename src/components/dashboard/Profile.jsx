@@ -4,8 +4,8 @@ const Profile = () => {
   const user = useUser();
 
   return (
-    <div className="flex justify-center items-center h-[80vh]">
-      <div className="bg-white shadow-lg rounded-2xl w-3/5">
+    <div className="flex justify-center items-center h-[80vh] w-[50vw]">
+      <div className="bg-white shadow-lg rounded-2xl w-full">
         <img
           alt="profile"
           src="https://wallpapercave.com/wp/wp10784415.jpg"
@@ -25,6 +25,10 @@ const Profile = () => {
 
           <p className="p-2 uppercase px-4 text-xs text-white bg-pink-500 rounded-full">
             {user?.role}
+          </p>
+          <p className="mt-1 p-1 px-2 text-sm bg-gray-200 rounded-full">
+            <span className="text-gray-600">Status:</span>{" "}
+            <span className="text-pink-500">{user?.status}</span>
           </p>
           <p className="mt-2 text-xl font-medium text-gray-800 ">
             User Id: {user?._id}
