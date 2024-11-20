@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -9,8 +9,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import PropTypes from "prop-types";
+import { AuthContext } from "../hooks/useAuth";
 
-export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);

@@ -2,17 +2,26 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { loginUser, googleLogin } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    loginUser(data.email, data.password);
+    navigate("/");
+  };
+  const googleLoginUser = () => {
+    googleLogin().then(() => {
+      navigate("/");
+    });
   };
   return (
     <div>
@@ -31,6 +40,7 @@ const Login = () => {
           <div className="my-2">
             <button
               type="button"
+              onClick={googleLoginUser}
               className="btn btn-outline btn-accent w-full gap-2"
             >
               <FcGoogle className="w-5 h-5" />
