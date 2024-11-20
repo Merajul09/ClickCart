@@ -15,7 +15,6 @@ import axios from "axios";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const from = location.state || "/";
   const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
@@ -61,7 +60,6 @@ const AuthProvider = ({ children }) => {
     loginUser,
     googleLogin,
     logOut,
-    from,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

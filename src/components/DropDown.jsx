@@ -14,7 +14,7 @@ const DropDown = () => {
             <img
               src={`${
                 user?.photoURL ||
-                "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
               }`}
             />
           </div>

@@ -7,7 +7,7 @@ import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { loginUser, googleLogin, from } = useAuth();
+  const { loginUser, googleLogin } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -16,12 +16,12 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     loginUser(data.email, data.password).then(() => {
-      navigate(from);
+      navigate("/");
     });
   };
   const googleLoginUser = () => {
     googleLogin().then(() => {
-      navigate(from);
+      navigate("/");
     });
   };
   return (
