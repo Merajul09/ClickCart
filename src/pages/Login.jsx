@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -63,16 +66,21 @@ const Login = () => {
                   Forgot password?
                 </a>
               </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="•••••••"
-                className="input input-bordered w-full"
-                {...register("password", {
-                  required: true,
-                  minLength: 6,
-                })}
-              />
+              <label className="input input-bordered flex items-center">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="•••••••"
+                  className="grow w-full"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                  })}
+                />
+                <p onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </p>
+              </label>
               {errors.password?.type === "required" && (
                 <p className="text-red-500 text-sm font-light">
                   Password is required
