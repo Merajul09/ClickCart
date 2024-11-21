@@ -2,7 +2,8 @@ import useUser from "../../hooks/useUser";
 
 const Profile = () => {
   const user = useUser();
-
+  const role = user.role;
+  console.log(role);
   return (
     <div className="flex justify-center items-center h-[80vh] w-[50vw]">
       <div className="bg-white shadow-lg rounded-2xl w-full">

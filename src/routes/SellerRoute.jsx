@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import Loader from "../components/Loader";
 import useAuth from "../hooks/useAuth";
 import useUser from "../hooks/useUser";
@@ -6,14 +6,15 @@ import PropTypes from "prop-types";
 
 const SellerRoute = ({ children }) => {
   const { role } = useUser();
-  const { loading } = useAuth();
+  const { user, loading } = useAuth();
+  const location = useLocation();
 
-  if (loading) return <Loader />;
-  if (role.toLowerCase() === "admin") return children;
+  if (loading || !role) return <Loader />;
+  if (user && role === "seller") return children;
 
-  return <Navigate to="/dashboard" />;
+  return <Navigate to="/login" state={{ from: location }} replace />;
 };
 SellerRoute.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node,
 };
 export default SellerRoute;

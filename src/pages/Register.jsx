@@ -22,7 +22,7 @@ const Register = () => {
     const name = data.name;
     const email = data.email;
     const role = data.role;
-    const status = role === "buyer" ? "Approved" : "pending";
+    const status = role === "buyer" ? "approved" : "pending";
     const wishlist = [];
     const userData = { name, email, role, status, wishlist };
     console.log(userData);
