@@ -19,6 +19,7 @@ import Wishlist from "../components/dashboard/Wishlist";
 import Overview from "../components/dashboard/Overview";
 import BuyerRoute from "./BuyerRoute";
 import Products from "../pages/Products";
+import CardDetails from "../pages/CardDetails";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,14 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/product/:id",
+        element: (
+          <PrivateRoute>
+            <CardDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },
