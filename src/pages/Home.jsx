@@ -1,12 +1,17 @@
-import ProductCard from "../components/custom/ProductCard";
-import SectionTitle from "../components/custom/SectionTitle";
+import Categories from "../components/home/Categories";
+import Faq from "../components/home/Faq";
+import FeaturedProducts from "../components/home/FeaturedProducts";
+import GetInTouch from "../components/home/GetInTouch";
+import Review from "../components/home/Review";
 
 const Home = () => {
   return (
     <div>
-      <h1>This is home</h1>
-      <SectionTitle heading={"Featured Products"} />
-      <ProductCard product={"product"} title={"ami"} price={22} stock={6} />
+      <FeaturedProducts />
+      <Categories />
+      <Review />
+      <Faq />
+      <GetInTouch />
     </div>
   );
 };
