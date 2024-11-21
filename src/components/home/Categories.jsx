@@ -13,7 +13,7 @@ const Categories = () => {
     <div>
       <SectionTitle subHeading={"our category lists"} heading={"categories"} />
 
-      {loading ? (
+      {loading || products === undefined ? (
         <Loader />
       ) : (
         <>

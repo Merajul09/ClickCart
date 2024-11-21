@@ -41,7 +41,7 @@ const NavBar = () => {
     </div>
   );
   return (
-    <div className="navbar bg-base-300">
+    <div className="navbar bg-base-300 px-10">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -67,7 +67,7 @@ const NavBar = () => {
             {links}
           </ul>
         </div>
-        <a href="/" className="btn btn-ghost text-xl">
+        <a href="/" className="btn btn-md btn-ghost text-xl bg-gray-300">
           Click cart
         </a>
       </div>
