@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import FooterC from "../components/FooterC";
 
 const MainLayout = () => {
   return (
@@ -10,7 +11,9 @@ const MainLayout = () => {
       <div className="container mx-auto">
         <Outlet></Outlet>
       </div>
-      <div>footer</div>
+      <div>
+        <FooterC />
+      </div>
     </>
   );
 };
