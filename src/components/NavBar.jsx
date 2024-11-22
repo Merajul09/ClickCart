@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import DropDown from "./DropDown";
+import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi";
 
 const NavBar = () => {
   const { user } = useAuth();
@@ -77,6 +78,12 @@ const NavBar = () => {
 
       {user ? (
         <div className="navbar-end gap-3">
+          <div className="flex">
+            <a href="/dashboard/wishlist" className="flex">
+              <HiOutlineHeart className="w-6 h-6" />
+            </a>
+          </div>
+          <HiOutlineShoppingCart className="w-6 h-6" />
           <DropDown />
         </div>
       ) : (

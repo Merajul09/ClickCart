@@ -8,7 +8,6 @@ const BuyerRoute = ({ children }) => {
   const { role } = useUser();
   const { user, loading } = useAuth();
   const location = useLocation();
-
   if (loading || !role) return <Loader />;
   if (user && role === "buyer") return children;
 

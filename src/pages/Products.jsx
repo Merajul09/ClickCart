@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import Loader from "../components/Loader";
+import useUser from "../hooks/useUser";
+import Swal from "sweetalert2";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -14,7 +16,7 @@ const Products = () => {
   const [uniqueCategory, setUniqueCategory] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-
+  const userData = useUser();
   useEffect(() => {
     setLoading(true);
     const fetch = async () => {
@@ -23,7 +25,6 @@ const Products = () => {
           `http://localhost:5000/all-products?title=${search}&page=${page}&limit=6&sort=${sort}&brand=${brand}&category=${category}`
         )
         .then((res) => {
-          console.log(res.data);
           setProducts(res.data.products);
           setUniqueBrand(res.data.brands);
           setUniqueCategory(res.data.categories);
@@ -53,6 +54,24 @@ const Products = () => {
     }
   };
 
+  const handleWishlist = async (id) => {
+    await axios
+      .patch(`http://localhost:5000/wishlist/add`, {
+        userEmail: userData.email,
+        productId: id,
+      })
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Added data to wishlist",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        }
+      });
+  };
   return (
     <div className="my-3">
       <div className="flex flex-col md:flex-row justify-center items-center gap-2 mb-3">
@@ -125,7 +144,7 @@ const Products = () => {
         </button>
       </div>
       <div>
-        {loading ? (
+        {loading || products === null ? (
           <Loader />
         ) : (
           <>
@@ -144,8 +163,16 @@ const Products = () => {
                       <h2 className="card-title">{product.title}</h2>
                       <h2 className="card-title">{product.price}</h2>
                       <p>{product.description}</p>
-                      <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                      <div className="flex gap2 justify-evenly">
+                        <button className="btn btn-secondary btn-outline">
+                          Add to cart
+                        </button>
+                        <button
+                          className="btn btn-primary btn-outline"
+                          onClick={() => handleWishlist(product._id)}
+                        >
+                          Add to wishlist
+                        </button>
                       </div>
                     </div>
                   </div>

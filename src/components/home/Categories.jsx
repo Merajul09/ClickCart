@@ -6,9 +6,8 @@ import useAuth from "../../hooks/useAuth";
 import Loader from "../Loader";
 
 const Categories = () => {
-  const { categories, products } = useProductData();
+  const { products } = useProductData();
   const { loading } = useAuth();
-  console.log(categories, products);
   return (
     <div>
       <SectionTitle subHeading={"our category lists"} heading={"categories"} />
