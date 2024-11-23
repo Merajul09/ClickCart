@@ -7,7 +7,7 @@ import SellerSideBar from "./sidebar/SellerSideBar";
 import AdminSideBar from "./sidebar/AdminSideBar";
 import useAuth from "../../hooks/useAuth";
 const SideBar = () => {
-  const { role } = useUser();
+  const { userData } = useUser();
   const { logOut } = useAuth();
   const handleLogout = () => {
     logOut();
@@ -25,9 +25,9 @@ const SideBar = () => {
           <Link to="/dashboard">
             <Sidebar.Item icon={HiChartPie}>Overview</Sidebar.Item>
           </Link>
-          {role === "buyer" && <BuyerSideBar />}
-          {role === "seller" && <SellerSideBar />}
-          {role === "admin" && <AdminSideBar />}
+          {userData.role === "buyer" && <BuyerSideBar />}
+          {userData.role === "seller" && <SellerSideBar />}
+          {userData.role === "admin" && <AdminSideBar />}
         </Sidebar.ItemGroup>
       </Sidebar.Items>
       <Sidebar.Items className="flex flex-col justify-end h-[60vh] fixed bottom-3 left-3">

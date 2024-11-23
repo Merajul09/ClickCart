@@ -27,18 +27,20 @@ const Register = () => {
     const userData = { name, email, role, status, wishlist };
     console.log(userData);
     createUser(email, data.password).then(() => {
-      axios.post(`http://localhost:5000/users`, userData).then((res) => {
-        if (res.data.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Registration successful",
-            showConfirmButton: false,
-            timer: 2500,
-          });
-          navigate("/");
-        }
-      });
+      axios
+        .post(`https://click-cart-server-pi.vercel.app/users`, userData)
+        .then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Registration successful",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+            navigate("/");
+          }
+        });
     });
   };
 

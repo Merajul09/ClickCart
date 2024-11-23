@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import Loader from "../components/Loader";
-import useUser from "../hooks/useUser";
-import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import useWishlist from "../hooks/useWishlist";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -16,13 +16,13 @@ const Products = () => {
   const [uniqueCategory, setUniqueCategory] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-  const userData = useUser();
+  const { handleWishlist } = useWishlist();
   useEffect(() => {
     setLoading(true);
     const fetch = async () => {
       axios
         .get(
-          `http://localhost:5000/all-products?title=${search}&page=${page}&limit=6&sort=${sort}&brand=${brand}&category=${category}`
+          `https://click-cart-server-pi.vercel.app/all-products?title=${search}&page=${page}&limit=6&sort=${sort}&brand=${brand}&category=${category}`
         )
         .then((res) => {
           setProducts(res.data.products);
@@ -45,7 +45,6 @@ const Products = () => {
     setCategory("");
     setSearch("");
     setSort("asc");
-    window.location.reload();
   };
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPage) {
@@ -54,24 +53,6 @@ const Products = () => {
     }
   };
 
-  const handleWishlist = async (id) => {
-    await axios
-      .patch(`http://localhost:5000/wishlist/add`, {
-        userEmail: userData.email,
-        productId: id,
-      })
-      .then((res) => {
-        if (res.data.modifiedCount) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Added data to wishlist",
-            showConfirmButton: false,
-            timer: 2500,
-          });
-        }
-      });
-  };
   return (
     <div className="my-3">
       <div className="flex flex-col md:flex-row justify-center items-center gap-2 mb-3">
@@ -155,15 +136,25 @@ const Products = () => {
             ) : (
               <div className="grid grid-cols-3 gap-2">
                 {products.map((product) => (
-                  <div key={product._id} className="card bg-base-100 shadow-xl">
-                    <figure>
-                      <img src={product.imageURL} alt={product.title} />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">{product.title}</h2>
-                      <h2 className="card-title">{product.price}</h2>
-                      <p>{product.description}</p>
-                      <div className="flex gap2 justify-evenly">
+                  <div key={product._id}>
+                    <div className="card bg-base-100 shadow-xl">
+                      <Link to={`/product/${product._id}`}>
+                        <figure>
+                          <img
+                            className="object-cover"
+                            src={product.imageURL}
+                            alt={product.title}
+                          />
+                        </figure>
+                        <div className="card-body">
+                          <h2 className="card-title">{product.title}</h2>
+                          <h2 className="card-title">
+                            Price: ${product.price}
+                          </h2>
+                          <p>{product.description}</p>
+                        </div>
+                      </Link>
+                      <div className="flex gap-1 mb-3 justify-evenly">
                         <button className="btn btn-secondary btn-outline">
                           Add to cart
                         </button>

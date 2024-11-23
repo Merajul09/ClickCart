@@ -2,9 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import DropDown from "./DropDown";
 import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi";
+import useUser from "../hooks/useUser";
 
 const NavBar = () => {
   const { user } = useAuth();
+  const { userData } = useUser();
   const links = (
     <div className="space-x-4">
       <NavLink
@@ -75,15 +77,19 @@ const NavBar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-
       {user ? (
         <div className="navbar-end gap-3">
-          <div className="flex">
-            <a href="/dashboard/wishlist" className="flex">
-              <HiOutlineHeart className="w-6 h-6" />
-            </a>
-          </div>
-          <HiOutlineShoppingCart className="w-6 h-6" />
+          {userData ? `Logged in as ${userData.role}` : ""}
+          {userData.role === "buyer" && (
+            <>
+              <div className="flex">
+                <a href="/dashboard/wishlist" className="flex">
+                  <HiOutlineHeart className="w-6 h-6" />
+                </a>
+              </div>
+              <HiOutlineShoppingCart className="w-6 h-6" />
+            </>
+          )}
           <DropDown />
         </div>
       ) : (

@@ -7,7 +7,9 @@ const useProductData = () => {
   const { loading } = useAuth();
   useEffect(() => {
     const fetchProductData = async () => {
-      const res = await axios.get(`http://localhost:5000/all-products`);
+      const res = await axios.get(
+        `https://click-cart-server-pi.vercel.app/all-products`
+      );
       setProductData(res.data);
     };
     if (!loading) {

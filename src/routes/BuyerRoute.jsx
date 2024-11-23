@@ -5,11 +5,11 @@ import useUser from "../hooks/useUser";
 import PropTypes from "prop-types";
 
 const BuyerRoute = ({ children }) => {
-  const { role } = useUser();
+  const { userData } = useUser();
   const { user, loading } = useAuth();
   const location = useLocation();
-  if (loading || !role) return <Loader />;
-  if (user && role === "buyer") return children;
+  if (loading || !userData.role) return <Loader />;
+  if (user && userData.role === "buyer") return children;
 
   return <Navigate to="/login" state={{ from: location }} replace />;
 };

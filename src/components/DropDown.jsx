@@ -7,7 +7,7 @@ const DropDown = () => {
     logOut();
   };
   return (
-    <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-end z-10">
       <div tabIndex={0} role="button">
         <div className="avatar">
           <div className="w-12 rounded-full">

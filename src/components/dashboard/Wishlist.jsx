@@ -3,7 +3,7 @@ import Loader from "../Loader";
 import useWishlist from "../../hooks/useWishlist";
 
 const Wishlist = () => {
-  const { wishlists, loading } = useWishlist();
+  const { wishlists, loading, handleRemoveFromWishlist } = useWishlist();
   return (
     <div className="overflow-x-auto">
       <h1 className="text-center font-semibold text-2xl mb-3">My Wishlist</h1>
@@ -23,9 +23,7 @@ const Wishlist = () => {
                   <Table.HeadCell>Product name</Table.HeadCell>
                   <Table.HeadCell>Category</Table.HeadCell>
                   <Table.HeadCell>Price</Table.HeadCell>
-                  <Table.HeadCell>
-                    <span className="sr-only">Edit</span>
-                  </Table.HeadCell>
+                  <Table.HeadCell>Edit</Table.HeadCell>
                 </Table.Head>
                 {wishlists.map((list, idx) => (
                   <Table.Body className="divide-y" key={idx}>
@@ -37,12 +35,12 @@ const Wishlist = () => {
                       <Table.Cell>{list.category}</Table.Cell>
                       <Table.Cell>{list.price}</Table.Cell>
                       <Table.Cell>
-                        <a
-                          href="#"
-                          className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                        <button
+                          onClick={() => handleRemoveFromWishlist(list._id)}
+                          className="btn btn-secondary btn-outline btn-sm dark:text-cyan-500"
                         >
                           Delete
-                        </a>
+                        </button>
                       </Table.Cell>
                     </Table.Row>
                   </Table.Body>

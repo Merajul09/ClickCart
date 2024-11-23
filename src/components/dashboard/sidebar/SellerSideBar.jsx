@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import useUser from "../../../hooks/useUser";
 
 const SellerSideBar = () => {
-  const { status } = useUser();
+  const { userData } = useUser();
   return (
     <>
-      {status === "approved" && (
+      {userData.status === "approved" && (
         <>
           <Link to="/dashboard/add-product">
             <Sidebar.Item icon={HiFolderAdd}>Add product</Sidebar.Item>
