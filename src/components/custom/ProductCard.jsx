@@ -11,6 +11,7 @@ const ProductCard = ({
   stock,
   description,
   category,
+  brand,
 }) => {
   return (
     <div>
@@ -54,17 +55,28 @@ const ProductCard = ({
           <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             {title}
           </h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            <span className="text-md font-bold text-orange-300">Category:</span>{" "}
-            {category}
-          </p>
+          {brand ? (
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              <span className="text-md font-bold text-orange-300">
+                {brand ? "Brand:" : ""}
+              </span>{" "}
+              {brand}
+            </p>
+          ) : (
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              <span className="text-md font-bold text-orange-300">
+                Category:
+              </span>{" "}
+              {category}
+            </p>
+          )}
           <p className="font-normal text-gray-700 dark:text-gray-400">
             {description}
           </p>
           <div className="mt-3 flex items-end justify-between">
             <p>
               <span className="text-lg font-bold text-orange-500">
-                {price ? "Price: ${price}" : ""}
+                {price ? "Price:" : ""} {price}
               </span>
             </p>
 
@@ -86,6 +98,7 @@ ProductCard.propTypes = {
   image: PropTypes.string,
   description: PropTypes.string,
   category: PropTypes.string,
+  brand: PropTypes.string,
   title: PropTypes.string,
   price: PropTypes.number,
   stock: PropTypes.number,
