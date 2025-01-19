@@ -62,7 +62,7 @@ const Contact = () => {
                   />
                   <label
                     htmlFor="name"
-                    className="absolute left-2 -top-2 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
+                    className="absolute left-2 -top-6 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
                   >
                     Name*
                   </label>
@@ -77,7 +77,7 @@ const Contact = () => {
                   />
                   <label
                     htmlFor="email"
-                    className="absolute left-2 -top-2 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
+                    className="absolute left-2 -top-6 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
                   >
                     Email*
                   </label>
@@ -93,7 +93,7 @@ const Contact = () => {
                 />
                 <label
                   htmlFor="subject"
-                  className="absolute left-2 -top-2 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
+                  className="absolute left-2 -top-6 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
                 >
                   Subject*
                 </label>
@@ -107,7 +107,7 @@ const Contact = () => {
                 ></textarea>
                 <label
                   htmlFor="message"
-                  className="absolute left-2 -top-2 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
+                  className="absolute left-2 -top-6 z-[1] px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-6 peer-focus:text-xs peer-focus:text-gray-900"
                 >
                   Your message*
                 </label>
