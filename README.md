@@ -74,5 +74,3 @@ The application is hosted on Netlify. To deploy your own version:
 1. Push the code to a GitHub repository.
 2. Connect your repository to Netlify.
 3. Deploy with a simple one-click process in Netlify's dashboard.
-
-some updates coming soon...
