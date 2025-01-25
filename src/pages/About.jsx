@@ -104,7 +104,7 @@ const About = () => {
             to a more sustainable world.
           </p>
         </section>
-
+        {/* should be added more section */}
         {/* CTA */}
         <div className="text-center mt-10">
           <Link
